@@ -3,5 +3,4 @@ compatibility_date = "2025-10-13"
 
 pages_build_output_dir = "dist"
 
-[compatibility_flags]
-node_compat = true
+compatibility_flags = ["nodejs_compat"]
