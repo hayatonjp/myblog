@@ -1,4 +1,6 @@
 import mdx from '@mdx-js/rollup';
+import adapter from "@hono/vite-dev-server/node";
+import build from "@hono/vite-build/node";
 import honox from 'honox/vite';
 import pages from '@hono/vite-cloudflare-pages'
 import remarkFrontmatter from 'remark-frontmatter';
@@ -11,12 +13,16 @@ export default defineConfig(({ mode }) => {
         emptyOutDir: false,
       },
       plugins: [
-        honox(),
+        honox({
+          devServer: { adapter },
+          client: { input: ["./app/style.css"] },
+        }),
         pages(),
         mdx({
           jsxImportSource: 'hono/jsx',
           remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
         }),
+        build(),
       ],
     };
 });
