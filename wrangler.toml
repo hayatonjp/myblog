@@ -1,8 +1,7 @@
 name = "myblog"
 compatibility_date = "2025-10-16"
 
-[pages_build_output_dir]
-# dir = "dist" 
+pages_build_output_dir = "dist"
 
 [[nodejs_compat]]
 node_compat = true
