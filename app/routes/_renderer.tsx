@@ -10,7 +10,6 @@ export default jsxRenderer(({ children }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"/>
-        <Link href="/style.css" rel="stylesheet" />
         <Script src="/app/client.ts" async />
       </head>
       <body class="has-background-light">

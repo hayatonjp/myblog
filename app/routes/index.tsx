@@ -4,7 +4,7 @@ import { Meta } from './types';
 export default createRoute((c) => {
   const posts = import.meta.glob<{ frontmatter: Meta }>('./posts/*.mdx', { eager: true })
   return c.render(
-    <div class="container is-max-desktop mt-6 fixed-grid">
+    <div class="container is-max-desktop mt-6 px-5 fixed-grid">
       <h1 class="is-size-2">記事一覧</h1>
       <div>
         {Object.entries(posts).map(([id, module]) => {
