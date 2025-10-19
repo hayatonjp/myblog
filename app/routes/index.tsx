@@ -21,7 +21,7 @@ export default createRoute((c) => {
           return (
             <div class="has-background-white p-4 is-rounded box is-shadowless">
               <a href={`${id.replace(/\.mdx$/, '')}`} class="is-flex is-align-items-center">
-                <div class="ml-4">
+                <div>
                   <p class="is-size-4 has-text-black">{module.frontmatter!.title}</p>
                   <p class="has-text-black">{module.frontmatter!.date}</p>
                 </div>
