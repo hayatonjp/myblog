@@ -11,8 +11,6 @@ date: 2025-10-19
 今年のGWにまとまった休みを使って「[すぐポチアンケ](https://sugupochi.com/)」という会員登録不要のアンケート投票サービスをリリースしました。
 勢いで始めた個人開発だったので、利用者0人でもいいやと思っていたのですが、さすがにこのままランニングコストがかかり続けるのは嫌だな、コストを理由にサービスを閉じたくないと思い、Cloudflareに完全移行しました。
 
-![すぐポチアンケ](/posts/2025-10-19/sugupochi.jpg)
-
 ### 移行前の構成
 
 - **ホスティング**：VPS(Railway) - 約7ドル(約1,000円)/月
@@ -27,8 +25,6 @@ date: 2025-10-19
 Cloudflare Workers/Pagesがあることは知っていましたが、普段使っているLaravelをそのままデプロイできず、バックエンド部分をJavaScriptに書き換える必要があったので、断念してRailwayを使っていました。
 [Railway](https://railway.com/)もGitHub連携すれば楽にデプロイできるので、気に入って使ってました。
 構成は、上記の通りでLaravelプロジェクトを立ち上げた後、その中でVue.jsをインストールして使うというモノシリックなサービスでした。
-
-![Railway](/posts/2025-10-19/railway.jpg)
 
 ### Cloudflare移行の決め手
 
@@ -85,8 +81,6 @@ Cloudflare Pagesは無料、Cloudflare Workersはフリープランで1日10万�
 #### 4. Cursorやばい
 [Cursor](https://cursor.com/ja)というAIコーディングエディタがあるのですが、Github Copliotと比べて、より自動的に問題を解決してくれる体験をしました。
 また、GitHubリポジトリのReadmeも全部CursorのAIを使って作ってもらいました。
-
-![readme](/posts/2025-10-19/readme.jpg)
 
 ### まとめ
 
