@@ -30,7 +30,6 @@
 
 .blog-detail ul, 
 .blog-detail ol {
-    margin-left: 2rem;
     margin-bottom: 1.2rem;
 }
 
@@ -105,10 +104,6 @@
     .blog-detail h3 {
         font-size: 1.2rem;
     }
-    .blog-detail ul,
-    .blog-detail ol {
-        margin-left: 1.2rem;
-    }
     
     /* スマホでのテーブル対応 */
     .blog-detail table {
@@ -126,3 +121,7 @@
     }
 }
 
+
+ul, ol {
+    margin-left: 1.2rem;
+}
