@@ -125,3 +125,16 @@
 ul, ol {
     margin-left: 1.2rem;
 }
+
+/* OSがダークモードの時に適用されるスタイル */
+@media (prefers-color-scheme: dark) {
+  body {
+    color: #eee; /* 明るい色の文字 */
+    background-color: #121212; /* 暗い色の背景 */
+  }
+  
+  /* 他の要素も必要に応じて調整します */
+  a {
+    color: #90caf9; /* リンク色も明るく */
+  }
+}
