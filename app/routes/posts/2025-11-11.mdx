@@ -1,0 +1,150 @@
+---
+title: php/laravelにおけるcount関数の速度の違いについて
+date: 2025-11-11
+---
+
+##### 2025/11/11
+## php/laravelにおけるcount関数の速度の違いについて
+
+### はじめに
+PHP/Laravelには、主に3つのcount関数がよく登場します。
+
+- PHP 標準の count()
+- Illuminate\Support\Collection::count()
+- Illuminate\Database\Query\Builder::count()
+
+それぞれどのような違いがあるのでしょうか？
+
+### 各count関数の違い
+1. PHP 標準の count()
+    - 配列やCountableインターフェースを実装したオブジェクトの要素数を返します。
+    - 例: `count($array);`
+2. Illuminate\Support\Collection::count()
+    - Laravelのコレクションオブジェクトの要素数を返します
+    - 例: `$collection->count();`
+3. Illuminate\Database\Query\Builder::count()
+    - データベースクエリの結果セットの行数を返します。
+    - `SELECT count(*) AS aggregate ...` という集計クエリを発行します。
+    - 例: `DB::table('users')->count();`
+
+## パフォーマンス比較
+### バージョン
+- PHP 8.2
+- Laravel 12.x
+- SQLite
+
+### 手順
+1. Laravelプロジェクトをセットアップ
+2. SQLiteデータベースに10万件のダミーデータを挿入
+3. 各count関数の実行時間を計測
+    - PHP標準のcount(), Collection::count()はget()してから呼び出し
+    - Query\Builder::count()は直接呼び出し
+
+### 検証コード
+```php
+<?php
+
+namespace App\Console\Commands;
+
+use Illuminate\Console\Command;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+
+class TestCountPerformance extends Command
+{
+    protected $signature = 'test:count-performance';
+    protected $description = 'Compare performance of count() vs ->count()';
+
+    public function handle()
+    {
+        $this->info('Count performance test starting...');
+
+        // DBクエリログを有効化
+        DB::connection()->enableQueryLog();
+
+        // --- パターン1: Model::get(); PHPのcount() ---
+        $this->comment("\n--- Pattern 1: Model::get(); PHPのcount() ---");
+        DB::flushQueryLog();
+        $users1 = User::query()->orderBy('id')->get();
+        $query1Get = DB::getQueryLog();
+        DB::flushQueryLog();
+
+        $startMemory1 = memory_get_usage();
+        $startTime1 = microtime(true);
+        $count1 = count($users1);
+
+        $endTime1 = microtime(true);
+        $endMemory1 = memory_get_usage();
+
+        $this->line("Count: $count1");
+        $this->line("Time: " . ($endTime1 - $startTime1) . " seconds");
+        $this->line("Memory Usage: " . (($endMemory1 - $startMemory1) / 1024 / 1024) . " MB");
+        $this->line("Query (get): " . json_encode($query1Get));
+
+
+        // --- パターン2: Model::get(); Collectionのcount() ---
+        $this->comment("\n--- Pattern 2: Model::get(); Collectionのcount() ---");
+        DB::flushQueryLog();
+        $users2 = User::query()->orderBy('id')->get();
+        $query2Get = DB::getQueryLog();
+        DB::flushQueryLog();
+
+        $startMemory2 = memory_get_usage();
+        $startTime2 = microtime(true);
+        $count2 = $users2->count(); 
+
+        $endTime2 = microtime(true);
+        $endMemory2 = memory_get_usage();
+        $query2Count = DB::getQueryLog();
+        DB::flushQueryLog();
+
+        $this->line("Count: $count2");
+        $this->line("Time: " . ($endTime2 - $startTime2) . " seconds");
+        $this->line("Memory Usage: " . (($endMemory2 - $startMemory2) / 1024 / 1024) . " MB");
+        $this->line("Query (get): " . json_encode($query2Get));
+        $this->line("Query (count): " . json_encode($query2Count));
+
+        // --- パターン3: Model::get()->count() ---
+        $this->comment("\n--- Pattern 3: Model::count() ---");
+        DB::flushQueryLog();
+        $count3 = User::query()->orderBy('id')->count();
+        $query3Get = DB::getQueryLog();
+        DB::flushQueryLog();
+
+        $startMemory3 = memory_get_usage();
+        $startTime3 = microtime(true);
+
+        $endTime3 = microtime(true);
+        $endMemory3 = memory_get_usage();
+
+        $this->line("Count: $count3");
+        $this->line("Time: " . ($endTime3 - $startTime3) . " seconds");
+        $this->line("Memory Usage: " . (($endMemory3 - $startMemory3) / 1024 / 1024) . " MB");
+        $this->line("Query (get+count): " . json_encode($query3Get));
+
+        $this->info("\nTest finished.");
+
+        return 0;
+    }
+}
+```
+### 
+## 出力結果
+![php/laravelにおけるcount関数の速度の違い](/static/2025-11-11/test.jpg)
+
+### 
+### Model::get() → PHP/Collectionでcount
+どちらの手法でも SQL は select * ... の1本のみ。クエリ時間は約260msでほぼ同じ。count() 部分はメモリ上の要素数を数えるだけなので追加のSQLは発生せず、処理時間も誤差レベル。
+### 
+### Model::count()
+SQLは select count(*) as aggregate ... の1本で、実行時間は約2.4ms。データ本体を取得しないため圧倒的に高速で、メモリ消費も最小限。
+
+## まとめ
+件数だけ欲しいなら Model::count() を使うのが圧倒的に効率的。大量データを取得してから手元で数えるパターンは、データ転送とメモリ負荷が無駄に大きく、今回の100,000件クラスになるとクエリ時間も100倍以上違う。
+一方、すでに取得済みのコレクションに対して数え直す必要があるケースなら、PHPの count() でも Collection の count() でも挙動は同じで、パフォーマンス差は気にする必要がない。
+
+import BaseLayout from '../../components/Layout';
+
+export default ({ children }) => (
+  <BaseLayout>{children}</BaseLayout>
+);
