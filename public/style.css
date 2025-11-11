@@ -9,6 +9,7 @@
     line-height: 2;
     letter-spacing: 0.01em;
     font-size: 1.1rem;
+    word-wrap: break-word;
 }
 
 .blog-detail h1, 
