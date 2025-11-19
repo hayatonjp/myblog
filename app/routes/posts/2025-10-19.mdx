@@ -1,10 +1,8 @@
 ---
 title: 月1,000円かかるサービスをCloudflareで0円にした話
 date: 2025-10-19
+tags: [Cloudflare, hono, TypeScript]
 ---
-
-##### 2025/10/19
-## 月1,000円かかるサービスをCloudflareで0円にした話
 
 ### 完全移行の背景
 
@@ -98,6 +96,6 @@ Cloudflare Pagesは無料、Cloudflare Workersはフリープランで1日10万�
 import BaseLayout from '../../components/Layout';
 
 export default ({ children }) => (
-  <BaseLayout>{children}</BaseLayout>
+  <BaseLayout frontmatter={frontmatter}>{children}</BaseLayout>
 );
 
