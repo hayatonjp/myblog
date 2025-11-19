@@ -6,6 +6,13 @@ type LayoutProps = {
     frontmatter?: Meta;
 };
 
+/**
+ * Layout component that wraps page content and optionally renders a header with date, title, and tags.
+ *
+ * @param children - The content to render inside the layout container.
+ * @param frontmatter - Optional post metadata; when present, its `date`, `title`, and `tags` are used to render the header.
+ * @returns The JSX layout element containing the provided `children` and, if available, a header showing the date, title, and tag list.
+ */
 export default function Layout({ children, frontmatter }: LayoutProps) {
     const hasTags = frontmatter?.tags && frontmatter.tags.length > 0;
 
