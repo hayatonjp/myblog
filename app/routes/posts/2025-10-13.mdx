@@ -1,10 +1,8 @@
 ---
 title: HonoXでブログ作りました
 date: 2025-10-13
+tags: [HonoX, TypeScript]
 ---
-
-##### 2025/10/13
-## HonoXでブログ作りました
 
 ### はじめに
 既にNuxt.jsで技術ブログを作っていたのですが、勉強も兼ねて使ってない技術スタックで作り直してみたいと思い、HonoXでブログを作成しました。
@@ -34,5 +32,5 @@ HonoXについては、[こちら](https://zenn.dev/yusukebe/articles/724940fa3f
 import BaseLayout from '../../components/Layout';
 
 export default ({ children }) => (
-  <BaseLayout>{children}</BaseLayout>
+  <BaseLayout frontmatter={frontmatter}>{children}</BaseLayout>
 );

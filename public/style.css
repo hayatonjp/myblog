@@ -39,6 +39,32 @@
     text-decoration: underline;
 }
 
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.tag-list-detail {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+}
+
+.tag-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.15rem 0.75rem;
+    border-radius: 10px;
+    background-color: #eef2ff;
+    color: #1e3a8a;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid #dbeafe;
+    letter-spacing: 0.02em;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
 .blog-detail h1 {
     font-size: 2.2rem;
 }
@@ -122,6 +148,32 @@
     }
 }
 
+.post-header {
+    margin-bottom: 2rem;
+}
+
+.post-date {
+    font-size: 0.95rem;
+    color: #6b7280;
+    margin: 0;
+}
+
+.post-title {
+    font-size: 2.25rem;
+    margin: 0.25rem 0 0.75rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+@media (prefers-color-scheme: dark) {
+  .post-date {
+    color: #a1a1aa;
+  }
+  .post-title {
+    color: #f3f4f6;
+  }
+}
+
 
 ul, ol {
     margin-left: 1.2rem;
@@ -133,6 +185,16 @@ ul, ol {
   .blog-detail {
     color: #eee; /* 明るい色の文字 */
     background-color: #121212; /* 暗い色の背景 */
+  }
+  .tag-pill {
+    background-color: #1f2937;
+    border-color: #374151;
+    color: #e5edff;
+  }
+  .tag-pill:hover {
+    background-color: #2563eb;
+    border-color: #2563eb;
+    color: #ffffff;
   }
   
   /* 他の要素も必要に応じて調整します */

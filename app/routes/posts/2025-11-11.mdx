@@ -1,10 +1,8 @@
 ---
 title: php/laravelにおけるcount関数の速度の違いについて
 date: 2025-11-11
+tags: [PHP, Laravel]
 ---
-
-##### 2025/11/11
-## php/laravelにおけるcount関数の速度の違いについて
 
 ### はじめに
 PHP/Laravelには、主に3つのcount関数がよく登場します。
@@ -146,5 +144,5 @@ SQLは select count(*) as aggregate ... の1本で、実行時間は約2.4ms。�
 import BaseLayout from '../../components/Layout';
 
 export default ({ children }) => (
-  <BaseLayout>{children}</BaseLayout>
+  <BaseLayout frontmatter={frontmatter}>{children}</BaseLayout>
 );

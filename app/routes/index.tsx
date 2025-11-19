@@ -24,6 +24,15 @@ export default createRoute((c) => {
                 <div>
                   <p class="is-size-4 has-text-black">{module.frontmatter!.title}</p>
                   <p class="has-text-black">{module.frontmatter!.date}</p>
+                  {module.frontmatter!.tags && module.frontmatter!.tags.length > 0 && (
+                    <div class="tag-list">
+                      {module.frontmatter!.tags.map((tag, index) => (
+                        <span class="tag-pill" data-tag={tag} key={`${tag}-${index}`}>
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </a>
             </div>
