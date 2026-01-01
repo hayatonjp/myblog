@@ -1,0 +1,21 @@
+---
+title: Go言語における順次処理と並行処理を比較してみた
+date: 2026-01-02
+tags: [Go]
+---
+
+## こういうの作りました
+[https://github.com/hayatonjp/simple-cli-go](https://github.com/hayatonjp/simple-cli-go)<br/>
+Go言語で画像リサイズとコピーが一括でできるCLIツールを作りました。
+
+## 画像リサイズの順次処理と並行処理の比較をしてみた
+```go run main.go benchmark <画像フォルダのパス>``` で、処理時間の比較を行いました。
+![image](/static/2026-01-02/image.png)
+
+並行処理は順次処理に比べて約2倍速く完了することがわかりました。
+
+import BaseLayout from '../../components/Layout';
+
+export default ({ children }) => (
+  <BaseLayout frontmatter={frontmatter}>{children}</BaseLayout>
+);
